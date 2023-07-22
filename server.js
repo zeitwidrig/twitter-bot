@@ -1,16 +1,9 @@
-const getRandomAffirmation = require('./random_affirmation');
+import { TwitterApi } from 'twitter-api-v2';
+import { config } from "./config.js";
+import { getRandomAffirmation } from './random_affirmation.js'
 
-const fs = require( 'fs' ),
-      path = require( 'path' ),
-      Twit = require( 'twit' ),
-      config = require( path.join( __dirname, 'config.js' ) );
+const twitterClient = new TwitterApi(config);
 
 const affirmation = getRandomAffirmation();
 
-const T = new Twit( config );
-
-T.post( 'statuses/update', { status: affirmation }, function( err, data, response ) {
-  console.log('Posted.');
-  // console.log( data )
-  // TODO: try to make another tweet if it fails for any reason
-} );
+await twitterClient.v2.tweet(affirmation);

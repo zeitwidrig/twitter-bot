@@ -1,5 +1,5 @@
-const affirmations = require('./affirmations');
+import { affirmations } from './affirmations.js'
 
-const getRandomAffirmation = () => affirmations[Math.floor(Math.random() * affirmations.length)];
-
-module.exports = getRandomAffirmation;
+export function getRandomAffirmation() {
+  return affirmations[Math.floor(Math.random() * affirmations.length)];
+}
